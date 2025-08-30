@@ -10,11 +10,11 @@ export default function Navbar() {
   return (
     <header className="flex items-center justify-between border-b border-[#302938] px-6 md:px-10 py-3 relative z-50 bg-[#141118]">
       {/* Logo */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1">
         <Link href="/">
-        <Image alt="logo" width={24} height={24} src="/logo.jpg"></Image>
+        <Image className="rounded-full" alt="logo" width={24} height={24} src="/logo.jpg"></Image>
         </Link>
-        <h2 className="font-bold text-lg">Feni Students Welfare Association</h2>
+        <h2 className="font-bold text-lg">FSWA</h2>
       </div>
 
       {/* Desktop Menu */}

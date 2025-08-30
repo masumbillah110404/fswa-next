@@ -1,13 +1,12 @@
 import HeroCards from "./components/HeroCards";
 import Stats from "./components/Stats";
-import Footer from "./components/Footer";
 
 export default function HomePage() {
   return (
     <div>
       {/* Banner */}
       <section
-        className="flex flex-col items-center justify-center text-center min-h-[400px] bg-cover bg-center px-6"
+        className="flex flex-col items-center justify-center text-center min-h-[300px] bg-cover bg-center px-6"
         style={{
           backgroundImage: "url('/banner.jpg')",
           backgroundColor: `rgba(0,0,0,0.4)`,
@@ -41,9 +40,6 @@ export default function HomePage() {
         </p>
       </section>
 
-
-      {/* footer section */}
-      <Footer />
     </div>
   );
 }
