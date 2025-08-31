@@ -1,60 +1,23 @@
+"use client";
 import MemberCard from "../components/MemberCard";
-
-
-const members = [
-  {
-    id: 1,
-    name: "Sadia Rahman",
-    dept: "English",
-    image: "/president.webp"
-  },
-  {
-    id: 2,
-    name: "Tanvir Ahmed",
-    dept: "Physics",
-    image: "/president.webp"
-  },
-  {
-    id: 3,
-    name: "Rifat Hossain",
-    dept: "Law",
-    image: "/president.webp"
-  }
-];
-
-const executiveMembers = [
-  {
-    id: 1,
-    name: "Farhan Islam",
-    dept: "Management",
-    image: "/president.webp"
-  },
-  {
-    id: 2,
-    name: "Nusrat Jahan",
-    dept: "Marketing",
-    image: "/president.webp"
-  }
-];
-
-const advisors = [
-  {
-    id: 1,
-    name: "Dr. Mahmudul Hasan",
-    dept: "Chemistry",
-    image: "/president.webp"
-  },
-  {
-    id: 2,
-    name: "Prof. Shamsul Alam",
-    dept: "History",
-    image: "/president.webp"
-  }
-];
-
-
+import { useContext } from "react";
+import { DataProviderContext } from "../Provider/Provider";
 
 export default function MembersPage() {
+  const { members, executiveMembers, advisorsList } = useContext(DataProviderContext);
+
+  const renderSection = (title, data) => (
+    <section className="px-6 md:px-20 py-12 text-center sm:text-left">
+      <h2 className="text-2xl font-bold text-[#7317cf] mb-6">{title}</h2>
+      {/* Grid for small screens, flex-row for large screens */}
+      <div className="grid grid-cols-2 gap-6 md:flex md:flex-row md:flex-wrap md:gap-8">
+        {data.map(member => (
+          <MemberCard key={member.id} member={member} />
+        ))}
+      </div>
+    </section>
+  );
+
   return (
     <div>
       {/* Banner */}
@@ -74,35 +37,9 @@ export default function MembersPage() {
         </p>
       </section>
 
-      {/* Members Section */}
-      <section className="px-6 md:px-20 py-12">
-        <h2 className="text-2xl font-bold text-[#7317cf] mb-6">Members</h2>
-        <div className="flex flex-wrap gap-8 justify-start">
-          {members.map(member => (
-            <MemberCard key={member.id} member={member} />
-          ))}
-        </div>
-      </section>
-
-      {/* Executive Members Section */}
-      <section className="px-6 md:px-20 py-12">
-        <h2 className="text-2xl font-bold text-[#7317cf] mb-6">Executive Members</h2>
-        <div className="flex flex-wrap gap-8">
-          {executiveMembers.map(member => (
-            <MemberCard key={member.id} member={member} />
-          ))}
-        </div>
-      </section>
-
-      {/* Advisors Section */}
-      <section className="px-6 md:px-20 py-12">
-        <h2 className="text-2xl font-bold text-[#7317cf] mb-6">Advisors</h2>
-        <div className="flex flex-wrap gap-8">
-          {advisors.map(member => (
-            <MemberCard key={member.id} member={member} />
-          ))}
-        </div>
-      </section>
+      {renderSection("Members", members)}
+      {renderSection("Executive Members", executiveMembers)}
+      {renderSection("Advisors", advisorsList)}
     </div>
   );
 }

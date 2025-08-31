@@ -1,42 +1,12 @@
+"use client";
 import Link from "next/link";
-
-export const events = [
-  {
-    id: 1,
-    title: "Annual Reunion 2025",
-    description: "Join us for our annual reunion with alumni and current students.",
-    time: "September 15, 2025, 4:00 PM",
-    image: "/events.jpg",
-    details: `
-      The Annual Reunion 2025 brings together alumni and current students for a day of celebration, networking, and fun. 
-      Enjoy cultural programs, guest speeches, and a gala dinner. Don't miss this opportunity to reconnect and make new memories!
-    `
-  },
-  {
-    id: 2,
-    title: "Career Guidance Seminar",
-    description: "Get expert advice from industry professionals and alumni.",
-    time: "October 10, 2025, 2:00 PM",
-    image: "/events.jpg",
-    details: `
-      This seminar features talks from successful alumni and industry leaders. 
-      Learn about career paths, resume building, and interview tips. Q&A session included. Open to all FSWA members.
-    `
-  },
-  {
-    id: 3,
-    title: "FSWA News: Scholarship Announced",
-    description: "New scholarships available for Feni students. Apply now!",
-    time: "August 28, 2025",
-    image: "/events.jpg",
-    details: `
-      FSWA is proud to announce new scholarships for deserving students from Feni. 
-      Applications are open until September 30. Visit our website for eligibility criteria and application process.
-    `
-  }
-];
+import Image from "next/image";
+import { useContext } from "react";
+import { DataProviderContext } from "../Provider/Provider";
 
 export default function EventsPage() {
+  const { events } = useContext(DataProviderContext);
+
   return (
     <div>
       {/* Banner */}
@@ -45,7 +15,7 @@ export default function EventsPage() {
         style={{
           backgroundImage: "url('/events.jpg')",
           backgroundColor: `rgba(0,0,0,0.4)`,
-          backgroundBlendMode: "darken"
+          backgroundBlendMode: "darken",
         }}
       >
         <h1 className="text-4xl mb-4 md:text-5xl text-white font-bold">
@@ -57,32 +27,41 @@ export default function EventsPage() {
       </section>
 
       {/* Events & News Cards */}
-      <section className="px-6 md:px-20 py-12 space-y-8">
-        {events.map(event => (
-          <div key={event.id} className="flex bg-white rounded-lg items-center p-2 shadow-md overflow-hidden">
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-32 h-32 object-cover rounded-[0.25rem]"
-            />
-            <div className="flex flex-col justify-between flex-1 p-6">
+      <section className="px-6 md:px-20 py-12 flex flex-col gap-12">
+        {events.map((event) => (
+          <div
+            key={event.id}
+            className="flex flex-col sm:flex-row bg-white rounded-lg items-start sm:items-center p-2 shadow-md overflow-hidden "
+          >
+            {/* Image */}
+            <div className="relative w-full sm:w-32 aspect-[4/3] sm:aspect-square flex-shrink-0 rounded-[0.25rem] overflow-hidden">
+              <Image
+                src={event.image}
+                alt={event.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Text */}
+            <div className="flex flex-col justify-between flex-1 pt-4 sm:pt-0 sm:pl-6">
               <div>
                 <h2 className="text-2xl font-bold text-[#7317cf]">{event.title}</h2>
-                <p className="text-gray-500 mt-2">
+                <p className="text-gray-500 mt-2 text-justify">
                   {event.description}{" "}
-                  <Link href={`/events/${event.id}`} className="text-[#7317cf] opacity-80 underline ml-1">
-                    Read more
+                  <Link
+                    href={`/events/${event.id}`}
+                    className="text-[#7317cf] opacity-80 underline ml-1"
+                  >
+                    Learn more
                   </Link>
                 </p>
               </div>
-              <div className="text-left text-sm text-gray-400 mt-4">
-                {event.time}
-              </div>
+              <div className="text-left text-sm text-gray-400 mt-4">{event.time}</div>
             </div>
           </div>
         ))}
       </section>
-
     </div>
   );
 }
