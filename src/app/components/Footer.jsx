@@ -1,9 +1,12 @@
 // components/Footer.jsx
 "use client";
+import React from "react";
+import { DataProviderContext } from "../Provider/Provider";
 
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
+  const { highlightColor } = React.useContext(DataProviderContext);
   return (
     <footer className="bg-gray-900 text-gray-200 py-10 mt-10">
       <div className="max-w-6xl mx-auto px-4">
@@ -20,7 +23,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium"
+                className={`bg-[#7317cf] hover:opacity-80 cursor-pointer px-4 py-2 rounded-lg font-medium`}
               >
                 Send
               </button>

@@ -1,13 +1,12 @@
 import HeroCards from "./components/HeroCards";
-import Stats from "./components/Stats";
-import Footer from "./components/Footer";
+import StatsWrapper from "./components/StatsWrapper";
 
 export default function HomePage() {
   return (
     <div>
       {/* Banner */}
       <section
-        className="flex flex-col items-center justify-center text-center min-h-[400px] bg-cover bg-center px-6"
+        className="flex flex-col items-center justify-center text-center min-h-[300px] bg-cover bg-center px-6"
         style={{
           backgroundImage: "url('/banner.jpg')",
           backgroundColor: `rgba(0,0,0,0.4)`,
@@ -27,10 +26,10 @@ export default function HomePage() {
       <HeroCards />
 
       {/* Stats */}
-      <Stats />
+      <StatsWrapper />
 
       {/* About Us (from original design) */}
-      <section className="px-6 md:px-20 py-12">
+      <section className="px-6 md:px-20 py-12 text-justify">
         <h2 className="text-3xl font-bold text-[#7317cf] mb-4">About Us</h2>
         <p className="text-gray-500 leading-relaxed">
           The Feni Students Welfare Association at Jagannath University, Dhaka,
@@ -41,9 +40,6 @@ export default function HomePage() {
         </p>
       </section>
 
-
-      {/* footer section */}
-      <Footer />
     </div>
   );
 }
