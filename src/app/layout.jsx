@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-white text-white font-['Public_Sans','Noto_Sans',sans-serif]">
+      <body className="text-white">
         <ClientProviders>
           {children}
         </ClientProviders>
