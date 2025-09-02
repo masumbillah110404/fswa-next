@@ -1,8 +1,6 @@
-// src/app/Provider/ClientProviders.jsx
 "use client";
 
 import { useState, useEffect } from "react";
-import { SessionProvider } from "next-auth/react";
 import MyDataProvider from "./Provider";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -10,18 +8,20 @@ import Footer from "../components/Footer";
 import { fetchEvents } from "../utils/fetchEvents";
 import { fetchMembers } from "../utils/fetchMembers";
 import { fetchCounts } from "../utils/fetchCount";
+import { fetchMessages } from "../utils/fetchMessages"; 
 
 export default function ClientProviders({ children }) {
   const [initialData, setInitialData] = useState(null);
 
   useEffect(() => {
     async function getData() {
-      const [events, membersData, counts] = await Promise.all([
+      const [events, membersData, counts, messages] = await Promise.all([
         fetchEvents(),
         fetchMembers(),
         fetchCounts(),
+        fetchMessages(),
       ]);
-      setInitialData({ events, ...membersData, counts });
+      setInitialData({ events, ...membersData, counts, messages });
     }
     getData();
   }, []);
@@ -35,12 +35,10 @@ export default function ClientProviders({ children }) {
   }
 
   return (
-    <SessionProvider>
-      <MyDataProvider initialData={initialData}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-      </MyDataProvider>
-    </SessionProvider>
+    <MyDataProvider initialData={initialData}>
+      <Navbar />
+      <main className="min-h-screen">{children}</main>
+      <Footer />
+    </MyDataProvider>
   );
 }

@@ -1,26 +1,15 @@
-import Hero from "./Hero";
+"use client";
 
-const heroes = [
-  {
-    id: 1,
-    image: "/president.webp",
-    alt: "President",
-    title: "President’s Message",
-    message: "Welcome to our association! We are committed to guiding our students and strengthening unity across the community."
-  },
-  {
-    id: 2,
-    image: "/gs.jpg",
-    alt: "General Secretary",
-    title: "General Secretary’s Message",
-    message: "Together we work to foster growth, cooperation, and success among all members of our welfare family."
-  }
-];
+import { useContext } from "react";
+import Hero from "./Hero";
+import { DataProviderContext } from "../Provider/Provider";
 
 export default function HeroCards() {
+  const { messages } = useContext(DataProviderContext);
+
   return (
     <section className="px-6 md:px-20 py-12 grid gap-8">
-      {heroes.map(hero => (
+      {messages.map(hero => (
         <Hero
           key={hero.id}
           image={hero.image}

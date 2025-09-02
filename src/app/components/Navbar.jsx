@@ -14,7 +14,11 @@ export default function Navbar() {
         <Link href="/">
         <Image className="rounded-full" alt="logo" width={24} height={24} src="/logo.jpg"></Image>
         </Link>
-        <h2 className="font-bold text-lg">FSWA</h2>
+        <h2 className="font-bold text-lg">FSWA
+
+          <Link href='/admin' className="text-[#7317cf] hover:opacity-80 cursor-pointer ml-2">admin</Link> 
+
+        </h2>
       </div>
 
       {/* Desktop Menu */}

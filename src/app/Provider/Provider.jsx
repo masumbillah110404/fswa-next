@@ -14,6 +14,7 @@ export default function MyDataProvider({ initialData = {}, children }) {
   const [executiveMembers, setExecutiveMembers] = useState(initialData.executiveMembers || []);
   const [advisorsList, setAdvisorsList] = useState(initialData.advisors || []);
   const [events, setEvents] = useState(initialData.events || []);
+  const [messages, setMessages] = useState(initialData.messages || []); 
   const [highlightColor, setHighlightColor] = useState("[#7317cf]");
 
   return (
@@ -26,6 +27,7 @@ export default function MyDataProvider({ initialData = {}, children }) {
         executiveMembers, setExecutiveMembers,
         advisorsList, setAdvisorsList,
         events, setEvents,
+        messages, setMessages, 
         highlightColor, setHighlightColor,
       }}
     >
