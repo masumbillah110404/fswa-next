@@ -8,7 +8,7 @@ import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 export default function Footer() {
   const { highlightColor } = React.useContext(DataProviderContext);
   return (
-    <footer className="bg-gray-900 text-gray-200 py-10 mt-10">
+    <footer className="bg-[#141118] text-gray-200 py-10 mt-10">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           

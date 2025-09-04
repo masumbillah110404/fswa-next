@@ -26,8 +26,6 @@ export default function Navbar() {
         <Link href="/" className="hover:text-[#7317cf]">Home</Link>
         <Link href="/events" className="hover:text-[#7317cf]">Events & News</Link>
         <Link href="/members" className="hover:text-[#7317cf]">Members</Link>
-        <Link href="/transportation" className="hover:text-[#7317cf]">Transportation</Link>
-        <Link href="/history" className="hover:text-[#7317cf]">History</Link>
         <Link href="/about" className="hover:text-[#7317cf]">About Us</Link>
       </nav>
 
@@ -45,8 +43,6 @@ export default function Navbar() {
           <Link href="/" onClick={() => setOpen(false)}>Home</Link>
           <Link href="/events" onClick={() => setOpen(false)}>Events & News</Link>
           <Link href="/members" onClick={() => setOpen(false)}>Members</Link>
-          <Link href="/transportation" onClick={() => setOpen(false)}>Transportation</Link>
-          <Link href="/history" onClick={() => setOpen(false)}>History</Link>
           <Link href="/about" onClick={() => setOpen(false)}>About Us</Link>
         </div>
       )}

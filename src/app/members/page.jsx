@@ -22,7 +22,7 @@ export default function MembersPage() {
     <div>
       {/* Banner */}
       <section
-        className="flex flex-col items-center justify-center text-center min-h-[300px] bg-cover bg-center px-6"
+        className="flex flex-col items-center justify-center text-center min-h-[300px] sm:min-h-[400px] bg-cover bg-center px-6"
         style={{
           backgroundImage: "url('/members.jpg')",
           backgroundColor: `rgba(0,0,0,0.4)`,
