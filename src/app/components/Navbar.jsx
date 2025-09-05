@@ -87,13 +87,13 @@ export default function Navbar() {
         </Link>
       </nav>
 
-      {/* Hamburger Button */}
-      <button
-        className="md:hidden text-white"
-        onClick={() => setOpen(!open)}
-      >
-        {open ? <X size={28} /> : <Menu size={28} />}
-      </button>
+                {/* Hamburger Button */}
+                <button
+                    className="md:hidden text-white"
+                    onClick={() => setOpen(!open)}
+                >
+                    {open ? <X size={28} /> : <Menu size={28} />}
+                </button>
 
       {/* Mobile Drawer */}
       {open && (
