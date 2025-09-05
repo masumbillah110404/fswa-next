@@ -1,7 +1,7 @@
 import Contacts from "./components/Contacts";
 import HeroCards from "./components/HeroCards";
 import Stats from "./components/Stats";
-
+import GalleryContainer from "./components/GalleryContainer";
 export default function HomePage() {
     return (
         <div>
@@ -25,7 +25,9 @@ export default function HomePage() {
             </section>
 
             {/* Hero Cards */}
-            <HeroCards />
+        <HeroCards />
+
+        <GalleryContainer />
 
             {/* Stats */}
             <Stats />
