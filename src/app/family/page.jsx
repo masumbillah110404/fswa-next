@@ -9,7 +9,7 @@ export default function MembersPage() {
   const renderSection = (title, data) => (
     <section className="px-6 md:px-20 py-12 text-center sm:text-left">
       <h2 className="text-2xl font-bold text-[#7317cf] mb-6">{title}</h2>
-      {/* Grid for small screens, flex-row for large screens */}
+ \
       <div className="grid grid-cols-2 gap-6 md:flex md:flex-row md:flex-wrap md:gap-8">
         {data.map(member => (
           <MemberCard key={member.id} member={member} />

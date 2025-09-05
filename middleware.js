@@ -5,7 +5,6 @@ export function middleware(req) {
   const tokenCookie = req.cookies.get("adminSession");
   const token = tokenCookie?.value;
 
-  // Allow login page without JWT
   if (req.nextUrl.pathname === "/admin/login") return NextResponse.next();
 
   if (!token) {
@@ -25,5 +24,5 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/:path*"], // protect /admin and all subpaths
+  matcher: ["/admin", "/admin/:path*"], 
 };
