@@ -1,6 +1,6 @@
 import Contacts from "./components/Contacts";
 import HeroCards from "./components/HeroCards";
-import StatsWrapper from "./components/StatsWrapper";
+import Stats from "./components/Stats";
 
 export default function HomePage() {
     return (
