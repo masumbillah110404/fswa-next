@@ -31,12 +31,12 @@ const page = () => {
                     {routes.map((route, idx=route.id) => (
                         <div
                             key={idx}
-                            className="p-5 rounded-lg shadow-md bg-white border border-gray-100 hover:shadow-lg transition"
+                            className="p-5 rounded-lg shadow-md bg-white border border-gray-100 hover:shadow-lg transition hover:scale-95 duration-1000"
                         >
-                            <h2 className="text-xl font-semibold text-primary mb-3">
+                            <h2 className="text-xl text-center font-semibold text-primary mb-3">
                                 {route.name}
                             </h2>
-                            <ul className="flex flex-wrap gap-2 text-white text-sm leading-relaxed space-y-1">
+                            <ul className="flex flex-wrap justify-center items-center gap-2 text-white text-sm leading-relaxed space-y-1 ">
                                 {route.stops.map((stop, stopIdx) => (
                                     <li className={`bg-neutral-200 text-black p-1 px-4 rounded-lg ` } key={stopIdx}>{stop}</li>
                                 ))}
