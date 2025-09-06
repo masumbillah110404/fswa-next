@@ -31,7 +31,7 @@ const page = () => {
                     {routes.map((route, idx=route.id) => (
                         <div
                             key={idx}
-                            className="p-5 rounded-lg shadow-md bg-white border border-gray-100 hover:shadow-lg transition hover:scale-95 duration-1000"
+                            className="p-5 rounded-lg shadow-md bg-white border border-gray-100 hover:shadow-lg transition hover:scale-95 duration-1000git"
                         >
                             <h2 className="text-xl text-center font-semibold text-primary mb-3">
                                 {route.name}
