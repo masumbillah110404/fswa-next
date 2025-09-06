@@ -2,6 +2,8 @@ import Contacts from "./components/Contacts";
 import HeroCards from "./components/HeroCards";
 import Stats from "./components/Stats";
 import GalleryContainer from "./components/GalleryContainer";
+import StatsWrapper from "./components/StatsWrapper";
+
 export default function HomePage() {
     return (
         <div>
