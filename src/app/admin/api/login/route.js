@@ -11,7 +11,7 @@ export async function POST(req) {
     const token = jwt.sign(
       { username },
       process.env.JWT_SECRET,
-      { expiresIn: parseInt(process.env.JWT_EXPIRES_IN) } // 1 hour
+      { expiresIn: parseInt(process.env.JWT_EXPIRES_IN) }
     );
 
     const res = NextResponse.json({ success: true });

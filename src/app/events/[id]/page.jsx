@@ -1,31 +1,55 @@
 "use client";
 import { notFound } from "next/navigation";
 import React from "react";
+import Image from "next/image";
 import { DataProviderContext } from "../../Provider/Provider";
 
 export default function EventDetailsPage({ params }) {
-  const { events } = React.useContext(DataProviderContext);
+
   const { id: eventId } = React.use(params);
-  const event = events.find(e => e.id === eventId);
+
+  const { events } = React.useContext(DataProviderContext);
+  const event = events.find((e) => e.id === eventId);
 
   if (!event) {
     notFound();
   }
 
   return (
-    <section className="h-screen px-6 md:px-20 py-16 flex justify-center items-center">
-      <div className="flex flex-col md:flex-row  bg-white rounded-lg shadow-md overflow-hidden max-w-4xl w-full">
-        <img
-          src={event.image}
-          alt={event.title}
-          className="w-full md:w-96 h-96 object-cover"
-        />
-        <div className="flex flex-col justify-center flex-1 md:p-10 py-4">
-          <h1 className="text-4xl font-bold text-[#7317cf]">{event.title}</h1>
-          <div className="text-gray-700 whitespace-pre-line text-lg text-justify">{event.details}</div>
-          <div className="text-right text-sm text-gray-400 mt-8">
-            {event.time}
+    <section className="min-h-screen px-6 md:px-20 py-16 flex justify-center items-center">
+      <div
+        className="
+          flex flex-col 
+          bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden
+          w-full max-w-4xl
+        "
+      >
+        {/* Image */}
+        <div className="relative w-full h-72 md:h-[400px]">
+          <Image
+            src={event.image}
+            alt={event.title}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
+
+        {/* Text Content */}
+        <div className="flex flex-col justify-center">
+          <div className="p-4">
+
+            <h1 className="sm:text-5xl text-2xl font-bold text-[var(--color-primary)] leading-snug text-left">
+              {event.title}
+            </h1>
+            <div className="mt-4 text-gray-700 text-lg text-justify">
+              {event.details}
+            </div>
           </div>
+            <div className="text-left bg-[var(--color-primary)] text-sm w-[max-content]  text-white py-1 px-4 mt-4 sm:mt-8 rounded-tr-xl">
+              {event.time}
+            </div>
         </div>
       </div>
     </section>

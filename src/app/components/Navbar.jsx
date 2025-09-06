@@ -1,53 +1,164 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import Image from "next/image"
+import { Menu, X, ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [membersOpen, setMembersOpen] = useState(false);
 
   return (
-    <header className="flex items-center justify-between border-b border-[#302938] px-6 md:px-10 py-3 relative z-50 bg-[#141118]">
+    <header className="flex items-center justify-between border-b border-[var(--color-primary)] px-6 md:px-10 relative z-50 bg-black text-white h-14">
       {/* Logo */}
-      <div className="flex items-center gap-1">
-        <Link href="/">
-        <Image className="rounded-full" alt="logo" width={24} height={24} src="/logo.jpg"></Image>
+      <div className="flex items-center gap-2 h-full">
+        <Link href="/" className="flex items-center h-full">
+          <Image
+            className="rounded-full"
+            alt="logo"
+            width={28}
+            height={28}
+            src="/logo.jpg"
+          />
         </Link>
-        <h2 className="font-bold text-lg">FSWA
-
-          <Link href='/admin' className="text-[#7317cf] hover:opacity-80 cursor-pointer ml-2">admin</Link> 
-
-        </h2>
+        <h2 className="font-bold text-lg text-white">FSWA</h2>
       </div>
 
       {/* Desktop Menu */}
-      <nav className="hidden md:flex gap-8">
-        <Link href="/" className="hover:text-[#7317cf]">Home</Link>
-        <Link href="/events" className="hover:text-[#7317cf]">Events & News</Link>
-        <Link href="/members" className="hover:text-[#7317cf]">Members</Link>
-        <Link href="/transportation" className="hover:text-[#7317cf]">Transportation</Link>
-        <Link href="/history" className="hover:text-[#7317cf]">History</Link>
-        <Link href="/about" className="hover:text-[#7317cf]">About Us</Link>
+      <nav className="hidden md:flex gap-4 h-full items-center">
+        <Link
+          href="/"
+          className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
+        >
+          Home
+        </Link>
+
+        {/* Family Dropdown */}
+        <div className="relative h-full">
+          <button
+            onClick={() => setMembersOpen(!membersOpen)}
+            className="flex items-center h-full px-4 gap-1 transition-colors hover:bg-[var(--color-primary)]"
+          >
+            Our Family{" "}
+            <ChevronDown
+              size={16}
+              className={`${membersOpen ? "rotate-180" : "rotate-0"} transition-transform`}
+            />
+          </button>
+
+          {membersOpen && (
+            <div className="absolute top-full mt-0 bg-black text-white rounded-md shadow-lg w-48 flex flex-col">
+              <Link
+                href="/family/members"
+                className="px-4 py-2 transition-colors hover:bg-[var(--color-primary)]"
+                onClick={() => setMembersOpen(false)}
+              >
+                Members
+              </Link>
+              <Link
+                href="/family/executiveMembers"
+                className="px-4 py-2 transition-colors hover:bg-[var(--color-primary)]"
+                onClick={() => setMembersOpen(false)}
+              >
+                Executive Members
+              </Link>
+              <Link
+                href="/family/advisors"
+                className="px-4 py-2 transition-colors hover:bg-[var(--color-primary)]"
+                onClick={() => setMembersOpen(false)}
+              >
+                Advisors
+              </Link>
+            </div>
+          )}
+        </div>
+
+        <Link
+          href="/events"
+          className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
+        >
+          Events & News
+        </Link>
+        <Link
+          href="/about"
+          className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
+        >
+          About Us
+        </Link>
       </nav>
 
-      {/* Hamburger Button */}
-      <button
-        className="md:hidden text-white"
-        onClick={() => setOpen(!open)}
-      >
-        {open ? <X size={28} /> : <Menu size={28} />}
-      </button>
+                {/* Hamburger Button */}
+                <button
+                    className="md:hidden text-white"
+                    onClick={() => setOpen(!open)}
+                >
+                    {open ? <X size={28} /> : <Menu size={28} />}
+                </button>
 
-      {/* Drawer */}
+      {/* Mobile Drawer */}
       {open && (
-        <div className="absolute top-full right-0 bg-[#1e1a24] w-56 shadow-lg p-5 flex flex-col gap-4 md:hidden">
-          <Link href="/" onClick={() => setOpen(false)}>Home</Link>
-          <Link href="/events" onClick={() => setOpen(false)}>Events & News</Link>
-          <Link href="/members" onClick={() => setOpen(false)}>Members</Link>
-          <Link href="/transportation" onClick={() => setOpen(false)}>Transportation</Link>
-          <Link href="/history" onClick={() => setOpen(false)}>History</Link>
-          <Link href="/about" onClick={() => setOpen(false)}>About Us</Link>
+        <div className="absolute top-full right-0 bg-black shadow-lg w-48 flex flex-col md:hidden rounded-b-md mr-6 overflow-hidden">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+          >
+            Home
+          </Link>
+
+          {/* Family Dropdown in Mobile */}
+          <div className="flex flex-col gap-1">
+            <button
+              onClick={() => setMembersOpen(!membersOpen)}
+              className="flex justify-between items-center px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+            >
+              Our Family{" "}
+              <ChevronDown
+                size={16}
+                className={`${membersOpen ? "rotate-180" : "rotate-0"} transition-transform`}
+              />
+            </button>
+            {membersOpen && (
+              <div className="flex flex-col gap-1 bg-[var(--color-secondary)]">
+                <Link
+                  href="/family/members"
+                  onClick={() => setOpen(false)}
+                  className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+                >
+                  Members
+                </Link>
+                <Link
+                  href="/family/executiveMembers"
+                  onClick={() => setOpen(false)}
+                  className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+                >
+                  Executive Members
+                </Link>
+                <Link
+                  href="/family/advisors"
+                  onClick={() => setOpen(false)}
+                  className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+                >
+                  Advisors
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <Link
+            href="/events"
+            onClick={() => setOpen(false)}
+            className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+          >
+            Events & News
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => setOpen(false)}
+            className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+          >
+            About Us
+          </Link>
         </div>
       )}
     </header>
