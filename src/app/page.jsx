@@ -1,11 +1,8 @@
 import Contacts from "./components/Contacts";
 import HeroCards from "./components/HeroCards";
 import Stats from "./components/Stats";
-<<<<<<< HEAD
-=======
 import GalleryContainer from "./components/GalleryContainer";
 import StatsWrapper from "./components/StatsWrapper";
->>>>>>> Sajib
 
 export default function HomePage() {
     return (
@@ -30,7 +27,6 @@ export default function HomePage() {
             </section>
 
             {/* Hero Cards */}
-<<<<<<< HEAD
             <HeroCards />
 
             {/* Stats */}
@@ -54,7 +50,6 @@ export default function HomePage() {
                 </section>
             </section>
 
-=======
         <HeroCards />
 
         <GalleryContainer />
@@ -80,7 +75,6 @@ export default function HomePage() {
                 </section>
             </section>
 
->>>>>>> Sajib
             <Contacts />
         </div>
     );
