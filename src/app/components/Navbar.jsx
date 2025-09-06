@@ -9,7 +9,7 @@ export default function Navbar() {
   const [membersOpen, setMembersOpen] = useState(false);
 
   return (
-    <header className=" sticky top-0 left-0 flex items-center justify-between border-b border-[var(--color-primary)] px-6 md:px-10  z-50 bg-secondary text-white h-16">
+    <header className=" sticky top-0 left-0 flex items-center justify-between border-b border-secondary px-6 md:px-10  z-50 bg-secondary text-white h-16">
       {/* Logo */}
       <div className="flex items-center gap-2 h-full">
         <Link href="/" className="flex items-center h-full">

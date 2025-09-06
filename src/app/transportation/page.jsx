@@ -31,7 +31,7 @@ const page = () => {
                     {routes.map((route, idx=route.id) => (
                         <div
                             key={idx}
-                            className="p-5 rounded-lg shadow bg-white border border-gray-100 hover:shadow-lg transition "
+                            className="p-5 rounded-lg shadow bg-neutral-100 border border-gray-100 hover:shadow-lg transition "
                         >
                             <div className="text-xl flex text-start font-semibold text-primary mb-3">
                                 <h2>{idx+1} .</h2>

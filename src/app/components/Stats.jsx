@@ -7,7 +7,7 @@ export default function Stats() {
         React.useContext(DataProviderContext);
 
     return (
-        <section className="bg-accent lg:mt-12">
+        <section className="bg-neutral-100 lg:mt-12">
             <section className="  text-gray-500 py-14 md:py-20 grid md:grid-cols-3 gap-8 text-center">
                 <div>
                     <h2 className="text-4xl lg:text-5xl font-bold text-primary">
