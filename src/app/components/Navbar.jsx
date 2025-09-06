@@ -9,7 +9,7 @@ export default function Navbar() {
   const [membersOpen, setMembersOpen] = useState(false);
 
   return (
-    <header className="flex items-center justify-between border-b border-[var(--color-primary)] px-6 md:px-10 relative z-50 bg-black text-white h-14">
+    <header className=" sticky top-0 left-0 flex items-center justify-between border-b border-[var(--color-primary)] px-6 md:px-10  z-50 bg-secondary text-white h-16">
       {/* Logo */}
       <div className="flex items-center gap-2 h-full">
         <Link href="/" className="flex items-center h-full">
@@ -80,6 +80,12 @@ export default function Navbar() {
           Events & News
         </Link>
         <Link
+          href="/transportation"
+          className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
+        >
+          Transportation
+        </Link>
+        <Link
           href="/about"
           className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
         >
@@ -119,7 +125,7 @@ export default function Navbar() {
               />
             </button>
             {membersOpen && (
-              <div className="flex flex-col gap-1 bg-[var(--color-secondary)]">
+              <div className="flex flex-col gap-1 bg-black">
                 <Link
                   href="/family/members"
                   onClick={() => setOpen(false)}
@@ -151,6 +157,13 @@ export default function Navbar() {
             className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
           >
             Events & News
+          </Link>
+          <Link
+            href="/transportation"
+            onClick={() => setOpen(false)}
+            className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+          >
+            Transportation
           </Link>
           <Link
             href="/about"

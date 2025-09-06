@@ -23,20 +23,21 @@ const page = () => {
             </section>
 
             <section className="max-w-screen-xl mx-auto py-10 md:py-14 lg:py-16">
-                <h1 className="text-3xl md:text-4xl font-bold text-secondary mb-8 md:mb-12 text-center">
+                <h1 className="text-2xl md:text-4xl font-bold text-secondary mb-8 md:mb-12 text-center">
                     জবি শিক্ষার্থীদের পরিবহন রুটসমূহ
                 </h1>
 
-                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 px-2 md:px-6 lg:px-0">
+                <section className="grid grid-cols-1  gap-2 md:gap-4 px-2 md:px-6 lg:px-0">
                     {routes.map((route, idx=route.id) => (
                         <div
                             key={idx}
-                            className="p-5 rounded-lg shadow-md bg-white border border-gray-100 hover:shadow-lg transition hover:scale-95 duration-1000git"
+                            className="p-5 rounded-lg shadow bg-white border border-gray-100 hover:shadow-lg transition "
                         >
-                            <h2 className="text-xl text-center font-semibold text-primary mb-3">
-                                {route.name}
-                            </h2>
-                            <ul className="flex flex-wrap justify-center items-center gap-2 text-white text-sm leading-relaxed space-y-1 ">
+                            <div className="text-xl flex text-start font-semibold text-primary mb-3">
+                                <h2>{idx+1} .</h2>
+                                <h3>{route.name}</h3>
+                            </div>
+                            <ul className="flex flex-wrap  items-center gap-1 text-white text-sm leading-relaxed space-y-1 ">
                                 {route.stops.map((stop, stopIdx) => (
                                     <li className={`bg-neutral-200 text-black p-1 px-4 rounded-lg ` } key={stopIdx}>{stop}</li>
                                 ))}

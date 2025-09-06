@@ -29,29 +29,6 @@ export default function HomePage() {
             {/* Hero Cards */}
             <HeroCards />
 
-            {/* Stats */}
-            <Stats />
-
-            {/* About Us (from original design) */}
-            <section className="">
-                <section className="lg:max-w-screen-xl px-2 md:px-6 lg:px-0 mx-auto  py-12 md:py-16 lg:py-20">
-                    <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-                        About Us
-                    </h2>
-                    <p className="text-gray-500 leading-relaxed">
-                        The Feni Students Welfare Association at Jagannath
-                        University, Dhaka, is a vibrant community dedicated to
-                        supporting students from the Feni district. We organize
-                        events, provide resources, and create a platform for
-                        networking and collaboration. Our goal is to enhance the
-                        university experience and prepare students for future
-                        success.
-                    </p>
-                </section>
-            </section>
-
-        <HeroCards />
-
         <GalleryContainer />
 
             {/* Stats */}
