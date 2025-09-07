@@ -15,16 +15,19 @@ export default function MembersPage() {
   const offset = currentPage * itemsPerPage;
 
   const filteredMembers = useMemo(() => {
-    return members.filter((m) => {
-      const q = searchQuery.toLowerCase();
+  const q = searchQuery.toLowerCase();
+  return members.filter((m) => {
       return (
-        m.name.toLowerCase().includes(q) ||
-        m.dept.toLowerCase().includes(q) ||
-        (m.session && m.session.toLowerCase().includes(q)) ||
-        (m.upazilla && m.upazilla.toLowerCase().includes(q))
+        (m.name && m.name.toString().toLowerCase().includes(q)) ||
+        (m.dept && m.dept.toString().toLowerCase().includes(q)) ||
+        (m.session && m.session.toString().toLowerCase().includes(q)) ||
+        (m.upazilla && m.upazilla.toString().toLowerCase().includes(q)) ||
+        (m.phone && m.phone.toString().toLowerCase().includes(q)) ||
+        (m.id && m.id.toString().toLowerCase().includes(q))
       );
     });
   }, [searchQuery, members]);
+
 
   const pageCount = Math.ceil(filteredMembers.length / itemsPerPage);
   const currentItems = filteredMembers.slice(offset, offset + itemsPerPage);

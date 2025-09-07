@@ -2,13 +2,26 @@ import { db } from "../../../firebase";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 export async function fetchMembers() {
-  const membersSnap = await getDocs(query(collection(db, "members"), orderBy("id")));
-  const execSnap = await getDocs(query(collection(db, "executiveMembers"), orderBy("id")));
-  const advisorsSnap = await getDocs(query(collection(db, "advisors"), orderBy("id")));
+  const membersSnap = await getDocs(query(collection(db, "members"), orderBy("name")));
+  const execSnap = await getDocs(query(collection(db, "executiveMembers"), orderBy("name")));
+  const advisorsSnap = await getDocs(query(collection(db, "advisors"), orderBy("name")));
+
+  const normalize = (doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id, 
+      name: data.name || '',
+      dept: data.dept || '',
+      phone: data.phone || '',
+      session: data.session || '',
+      upazilla: data.upazilla || '',
+      image: data.image || ''
+    };
+  };
 
   return {
-    members: membersSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })),
-    executiveMembers: execSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })),
-    advisors: advisorsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+    members: membersSnap.docs.map(normalize),
+    executiveMembers: execSnap.docs.map(normalize),
+    advisors: advisorsSnap.docs.map(normalize)
   };
 }

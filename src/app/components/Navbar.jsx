@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -85,15 +85,23 @@ export default function Navbar() {
         >
           About Us
         </Link>
+
+        {/* Admin Link */}
+        <Link
+          href="/admin-login"
+          className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
+        >
+          Admin
+        </Link>
       </nav>
 
-                {/* Hamburger Button */}
-                <button
-                    className="md:hidden text-white"
-                    onClick={() => setOpen(!open)}
-                >
-                    {open ? <X size={28} /> : <Menu size={28} />}
-                </button>
+      {/* Hamburger Button */}
+      <button
+          className="md:hidden text-white"
+          onClick={() => setOpen(!open)}
+      >
+          {open ? <X size={28} /> : <Menu size={28} />}
+      </button>
 
       {/* Mobile Drawer */}
       {open && (
@@ -158,6 +166,15 @@ export default function Navbar() {
             className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
           >
             About Us
+          </Link>
+
+          {/* Admin Link in Mobile */}
+          <Link
+            href="/admin-login"
+            onClick={() => setOpen(false)}
+            className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+          >
+            Admin
           </Link>
         </div>
       )}
