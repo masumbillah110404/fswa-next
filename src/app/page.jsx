@@ -1,6 +1,9 @@
 import Contacts from "./components/Contacts";
 import HeroCards from "./components/HeroCards";
 import Stats from "./components/Stats";
+import GalleryContainer from "./components/GalleryContainer";
+import StatsWrapper from "./components/StatsWrapper";
+import FeaturedEvents from "./components/FeaturedEvents";
 
 export default function HomePage() {
     return (
@@ -10,7 +13,7 @@ export default function HomePage() {
                 className="flex flex-col items-center justify-center text-center  bg-cover bg-center px-6 min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh]"
                 style={{
                     backgroundImage: "url('/banner.jpg')",
-                    backgroundColor: `rgba(0,0,0,0.6)`,
+                    backgroundColor: `rgba(0,0,0,0.5)`,
                     backgroundBlendMode: "darken",
                 }}
             >
@@ -27,12 +30,19 @@ export default function HomePage() {
             {/* Hero Cards */}
             <HeroCards />
 
+        <GalleryContainer />
+
             {/* Stats */}
             <Stats />
+            <FeaturedEvents />
 
             {/* About Us (from original design) */}
-            <section className="">
-                <section className="lg:max-w-screen-xl px-2 md:px-6 lg:px-0 mx-auto  py-12 md:py-16 lg:py-20">
+            
+            <section className="flex gap-10 lg:gap-20 flex-col-reverse md:flex-row justify-center lg:max-w-screen-xl px-2 md:px-6 lg:px-0 mx-auto  py-12 md:py-16 lg:py-20">
+                <div className="w-full md:w-1/2 h-80 lg:h-96 rounded-xl imageClipPath bg-cover bg-center bg-black" style={{ backgroundImage: "url('/aboutUsImg.jpg')",backgroundColor: `rgba(0,0,0,0.3)`,backgroundBlendMode: "darken", }}>
+
+                </div>
+                <section className="w-full md:w-1/2">
                     <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
                         About Us
                     </h2>
