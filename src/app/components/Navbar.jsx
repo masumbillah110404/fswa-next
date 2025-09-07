@@ -80,6 +80,12 @@ export default function Navbar() {
           Events & News
         </Link>
         <Link
+          href="/help-request"
+          className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
+        >
+          Help & Support
+        </Link>
+        <Link
           href="/transportation"
           className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
         >
@@ -157,6 +163,13 @@ export default function Navbar() {
             className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
           >
             Events & News
+          </Link>
+          <Link
+            href="/help-request"
+            onClick={() => setOpen(false)}
+            className="px-2 py-2 transition-colors hover:bg-[var(--color-primary)]"
+          >
+            Help & Support
           </Link>
           <Link
             href="/transportation"
