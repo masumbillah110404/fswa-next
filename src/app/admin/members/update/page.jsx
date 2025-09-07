@@ -97,7 +97,7 @@ export default function UpdateMember() {
   };
 
   // Filter members by name
-  const filteredMembers = executiveMembers.filter(m =>
+  const filteredMembers = members.filter(m =>
   (m.name?.toLowerCase() || '').includes(searchTerm.toLowerCase())
 );
 

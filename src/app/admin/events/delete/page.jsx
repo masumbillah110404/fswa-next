@@ -41,8 +41,9 @@ export default function DeleteEvent() {
   };
 
   const filteredEvents = events.filter(ev =>
-  (ev.title?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+  (ev.title?.toLowerCase() || '').includes(search.toLowerCase())
 );
+
 
 
   return (
