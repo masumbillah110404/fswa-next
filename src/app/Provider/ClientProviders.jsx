@@ -22,10 +22,10 @@ export default function ClientProviders({ children }) {
         fetchMessages(),
       ]);
 
-      // Normalize all members/executive/advisors to ensure consistent structure
+
       const normalize = (list) =>
         list.map((m) => ({
-          id: m.id, // Firestore doc id
+          id: m.id,
           name: m.name || '',
           dept: m.dept || '',
           phone: m.phone || '',
