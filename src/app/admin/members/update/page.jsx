@@ -97,9 +97,10 @@ export default function UpdateMember() {
   };
 
   // Filter members by name
-  const filteredMembers = members.filter(m =>
-    m.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredMembers = executiveMembers.filter(m =>
+  (m.name?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+);
+
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow rounded-lg text-black">

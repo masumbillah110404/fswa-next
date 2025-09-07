@@ -82,9 +82,10 @@ export default function UpdateEvent() {
     setForm({});
   };
 
-  const filteredEvents = events.filter((ev) =>
-    ev.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredEvents = events.filter(ev =>
+  (ev.title?.toLowerCase() || '').includes(search.toLowerCase())
+);
+
 
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white shadow rounded-lg text-black">

@@ -98,8 +98,9 @@ export default function UpdateAdvisor() {
   };
 
   const filteredAdvisors = advisorsList.filter(a =>
-    a.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  (a.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) 
+);
+
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow rounded-lg text-black">

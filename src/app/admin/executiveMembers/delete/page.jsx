@@ -12,12 +12,8 @@ export default function DeleteExecutiveMember() {
   const [deleting, setDeleting] = useState(false);
 
   const filteredMembers = executiveMembers.filter(m =>
-    m.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    m.dept.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (m.session && m.session.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (m.upazilla && m.upazilla.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-
+  (m.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) 
+);
   const handleSelect = (member) => setSelectedMember(member);
 
   const handleDelete = async () => {

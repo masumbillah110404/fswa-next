@@ -12,9 +12,10 @@ export default function DeleteMember() {
   const [deleting, setDeleting] = useState(false);
 
   // Filter members by search term
-  const filteredMembers = members.filter(m =>
-    m.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredMembers = executiveMembers.filter(m =>
+  (m.name?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+);
+
 
   const handleSelect = (member) => setSelectedMember(member);
 

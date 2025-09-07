@@ -12,11 +12,10 @@ export default function DeleteAdvisor() {
   const [deleting, setDeleting] = useState(false);
 
   const filteredAdvisors = advisorsList.filter(a =>
-    a.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    a.dept.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (a.session && a.session.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (a.upazilla && a.upazilla.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  (a.name?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+);
+
+
 
   const handleSelect = (advisor) => setSelectedAdvisor(advisor);
 

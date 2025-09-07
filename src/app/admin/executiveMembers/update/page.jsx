@@ -103,8 +103,9 @@ export default function UpdateExecutiveMember() {
   };
 
   const filteredMembers = executiveMembers.filter(m =>
-    m.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  (m.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) 
+);
+
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow rounded-lg text-black">
