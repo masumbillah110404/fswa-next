@@ -9,7 +9,7 @@ export default function Navbar() {
   const [membersOpen, setMembersOpen] = useState(false);
 
   return (
-    <header className=" sticky top-0 left-0 flex items-center justify-between border-b border-secondary px-6 md:px-10  z-50 bg-secondary text-white h-16">
+    <header className=" fixed top-0 left-0 flex items-center justify-between  px-6 md:px-10  z-50 bg-primary  text-white h-16 w-full">
       {/* Logo */}
       <div className="flex items-center gap-2 h-full">
         <Link href="/" className="flex items-center h-full">
@@ -25,7 +25,7 @@ export default function Navbar() {
       </div>
 
       {/* Desktop Menu */}
-      <nav className="hidden md:flex gap-4 h-full items-center">
+      <nav className="hidden lg:flex gap-4 h-full items-center">
         <Link
           href="/"
           className="flex items-center h-full px-4 transition-colors hover:bg-[var(--color-primary)]"
@@ -109,7 +109,7 @@ export default function Navbar() {
 
       {/* Hamburger Button */}
       <button
-          className="md:hidden text-white"
+          className="lg:hidden text-white"
           onClick={() => setOpen(!open)}
       >
           {open ? <X size={28} /> : <Menu size={28} />}
@@ -117,7 +117,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {open && (
-        <div className="absolute top-full right-0 bg-black shadow-lg w-48 flex flex-col md:hidden rounded-b-md mr-6 overflow-hidden">
+        <div className="absolute top-full right-0 bg-black shadow-lg w-48 flex flex-col lg:hidden rounded-b-md mr-6 overflow-hidden">
           <Link
             href="/"
             onClick={() => setOpen(false)}

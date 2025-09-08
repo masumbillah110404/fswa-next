@@ -50,7 +50,7 @@ const HelpRequestPage = () => {
             </section>
 
             <section className="py-10 md:py-16 px-6">
-                <h1 className="text-2xl font-bold mb-6 md:mb-8 text-primary text-center md:text-3xl">
+                <h1 className="text-2xl font-bold mb-6 md:mb-8 text-primary text-center md:text-3xl lg:text-4xl">
                     Reach Out for Support
                 </h1>
                 <form
