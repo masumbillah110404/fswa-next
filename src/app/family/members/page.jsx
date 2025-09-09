@@ -12,30 +12,37 @@ export default function MembersPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const offset = currentPage * itemsPerPage;
+  // 🔹 Sort by session start year (ascending → seniors first)
+  const sortedMembers = useMemo(() => {
+    return [...members].sort((a, b) => {
+      const yearA = parseInt(a.session?.split("-")[0]) || 0;
+      const yearB = parseInt(b.session?.split("-")[0]) || 0;
+      return yearA - yearB; 
+    });
+  }, [members]);
 
   const filteredMembers = useMemo(() => {
-  const q = searchQuery.toLowerCase();
-  return members.filter((m) => {
+    const q = searchQuery.toLowerCase();
+    return sortedMembers.filter((m) => {
       return (
         (m.name && m.name.toString().toLowerCase().includes(q)) ||
         (m.dept && m.dept.toString().toLowerCase().includes(q)) ||
         (m.session && m.session.toString().toLowerCase().includes(q)) ||
         (m.upazilla && m.upazilla.toString().toLowerCase().includes(q)) ||
+        (m.bloodGroup && m.bloodGroup.toString().toLowerCase().includes(q)) ||
         (m.phone && m.phone.toString().toLowerCase().includes(q)) ||
         (m.id && m.id.toString().toLowerCase().includes(q))
       );
     });
-  }, [searchQuery, members]);
-
+  }, [searchQuery, sortedMembers]);
 
   const pageCount = Math.ceil(filteredMembers.length / itemsPerPage);
+  const offset = currentPage * itemsPerPage;
   const currentItems = filteredMembers.slice(offset, offset + itemsPerPage);
 
   const scrollToTop = () => {
     const section = document.getElementById("members-section");
     if (!section) return;
-
     const start = window.scrollY;
     const end = section.offsetTop;
     const duration = 500;
@@ -49,9 +56,7 @@ export default function MembersPage() {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const ease = easeInOutCubic(progress);
-
       window.scrollTo(0, start + (end - start) * ease);
-
       if (elapsed < duration) requestAnimationFrame(animateScroll);
     };
 
@@ -87,7 +92,7 @@ export default function MembersPage() {
             <FaSearch className="text-gray-500 mr-2" />
             <input
               type="text"
-              placeholder="Search by name, dept, session or upazila..."
+              placeholder="Search by name, dept, session, blood group or upazila..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1 outline-none text-sm sm:text-base"
@@ -108,6 +113,7 @@ export default function MembersPage() {
                   alt={member.name}
                   fill
                   sizes="100%"
+                  unoptimized
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
@@ -119,6 +125,9 @@ export default function MembersPage() {
                 <p className="text-xs sm:text-sm text-gray-600">Dept: {member.dept}</p>
                 <p className="text-xs sm:text-sm text-gray-600">Session: {member.session}</p>
                 <p className="text-xs sm:text-sm text-gray-600">Upazila: {member.upazilla}</p>
+                <p className="text-xs sm:text-sm text-gray-600">
+                  Blood Group: {member.bloodGroup && member.bloodGroup.trim() !== "" ? member.bloodGroup : "N/A"}
+                </p>
 
                 {member.phone && (
                   <div className="mt-3 flex justify-center">

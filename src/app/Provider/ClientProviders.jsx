@@ -31,6 +31,7 @@ export default function ClientProviders({ children }) {
           phone: m.phone || '',
           session: m.session || '',
           upazilla: m.upazilla || '',
+          bloodGroup: m.bloodGroup || '',
           image: m.image || ''
         }));
 

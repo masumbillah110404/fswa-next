@@ -9,9 +9,10 @@ export default function CreateMember() {
     name: '',
     dept: '',
     phone: '',
-    session: '',
+    sessionStart: '',
     upazilla: '',
-    image: null
+    bloodGroup: '',
+    image: null,
   });
   const [uploading, setUploading] = useState(false);
 
@@ -36,35 +37,46 @@ export default function CreateMember() {
     setUploading(true);
 
     try {
-      // Convert file to base64
       const reader = new FileReader();
       reader.readAsDataURL(form.image);
       reader.onloadend = async () => {
         const base64Image = reader.result.split(',')[1];
 
-        // Upload to ImgBB
-        const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
-          method: 'POST',
-          body: new URLSearchParams({ image: base64Image })
-        });
+        const res = await fetch(
+          `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
+          {
+            method: 'POST',
+            body: new URLSearchParams({ image: base64Image }),
+          }
+        );
 
         const data = await res.json();
         if (!data.success) throw new Error('Image upload failed');
 
-        // Save to Firestore
+        const startYear = parseInt(form.sessionStart, 10);
+        const endYear = isNaN(startYear) ? '' : startYear + 1;
+
         const docData = {
           name: form.name,
           dept: form.dept,
           phone: form.phone,
-          session: form.session,
           upazilla: form.upazilla,
-          image: data.data.url // <- save the ImgBB URL
+          bloodGroup: form.bloodGroup || 'N/A',
+          session: `${form.sessionStart}-${endYear}`,
+          image: data.data.url,
         };
 
         await addDoc(collection(db, 'members'), docData);
 
-        // Clear form
-        setForm({ name:'', dept:'', phone:'', session:'', upazilla:'', image: null });
+        setForm({
+          name: '',
+          dept: '',
+          phone: '',
+          sessionStart: '',
+          upazilla: '',
+          bloodGroup: '',
+          image: null,
+        });
         setUploading(false);
         alert('Member created successfully!');
       };
@@ -74,11 +86,16 @@ export default function CreateMember() {
     }
   };
 
+  const endYear =
+    form.sessionStart && !isNaN(parseInt(form.sessionStart, 10))
+      ? parseInt(form.sessionStart, 10) + 1
+      : '';
+
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow rounded-lg text-black">
       <h1 className="text-2xl font-bold mb-4">Create Member</h1>
       <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-        {['name','dept','phone','session','upazilla'].map(field => (
+        {['name', 'dept', 'phone', 'upazilla'].map((field) => (
           <input
             key={field}
             type="text"
@@ -90,6 +107,46 @@ export default function CreateMember() {
             required
           />
         ))}
+
+        {/* Blood Group */}
+        <select
+          name="bloodGroup"
+          value={form.bloodGroup}
+          onChange={handleChange}
+          className="border p-2 rounded"
+          required
+        >
+          <option value="">Select Blood Group</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+
+        {/* Session Start & End */}
+        <div className="flex gap-2">
+          <input
+            type="number"
+            name="sessionStart"
+            placeholder="Session Start"
+            value={form.sessionStart}
+            onChange={handleChange}
+            className="border p-2 rounded w-1/2"
+            required
+          />
+          <input
+            type="number"
+            name="sessionEnd"
+            placeholder="Session End"
+            value={endYear}
+            readOnly
+            className="border p-2 rounded w-1/2 bg-gray-100 cursor-not-allowed"
+          />
+        </div>
 
         {/* Styled File Input */}
         <label className="flex items-center justify-between border p-2 rounded cursor-pointer hover:bg-gray-100">
@@ -105,7 +162,9 @@ export default function CreateMember() {
         </label>
 
         <button
-          className={`px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 ${
+            uploading ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
           disabled={uploading}
         >
           {uploading ? 'Uploading...' : 'Create'}

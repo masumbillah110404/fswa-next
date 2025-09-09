@@ -14,22 +14,24 @@ export default function UpdateMember() {
     name: '',
     dept: '',
     phone: '',
-    session: '',
+    sessionStart: '',
     upazilla: '',
+    bloodGroup: '',
     image: null
   });
   const [uploading, setUploading] = useState(false);
   const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
 
-  // Select member from filtered list
   const handleSelect = (member) => {
     setSelectedMember(member);
+    const sessionStart = member.session?.split('-')[0] || '';
     setForm({
       name: member.name || '',
       dept: member.dept || '',
       phone: member.phone || '',
-      session: member.session || '',
+      sessionStart,
       upazilla: member.upazilla || '',
+      bloodGroup: member.bloodGroup || '',
       image: null
     });
   };
@@ -54,7 +56,6 @@ export default function UpdateMember() {
     try {
       let imageUrl = selectedMember.image;
 
-      // Upload new image if selected
       if (form.image) {
         const reader = new FileReader();
         reader.readAsDataURL(form.image);
@@ -73,21 +74,33 @@ export default function UpdateMember() {
         });
       }
 
+      // Compute session end
+      const startYear = parseInt(form.sessionStart, 10);
+      const sessionEnd = isNaN(startYear) ? '' : startYear + 1;
+
       // Update Firestore
       const docRef = doc(db, 'members', selectedMember.id);
       await updateDoc(docRef, {
-        ...form,
+        name: form.name,
+        dept: form.dept,
+        phone: form.phone,
+        session: `${form.sessionStart}-${sessionEnd}`,
+        upazilla: form.upazilla,
+        bloodGroup: form.bloodGroup,
         image: imageUrl
       });
 
       // Update context
       setMembers(prev =>
-        prev.map(m => m.id === selectedMember.id ? { ...m, ...form, image: imageUrl } : m)
+        prev.map(m => m.id === selectedMember.id
+          ? { ...m, name: form.name, dept: form.dept, phone: form.phone, session: `${form.sessionStart}-${sessionEnd}`, upazilla: form.upazilla, bloodGroup: form.bloodGroup, image: imageUrl }
+          : m
+        )
       );
 
       alert('Member updated successfully!');
       setSelectedMember(null);
-      setForm({ name:'', dept:'', phone:'', session:'', upazilla:'', image: null });
+      setForm({ name:'', dept:'', phone:'', sessionStart:'', upazilla:'', bloodGroup:'', image: null });
       setSearchTerm('');
     } catch (err) {
       alert(err.message || err);
@@ -98,9 +111,12 @@ export default function UpdateMember() {
 
   // Filter members by name
   const filteredMembers = members.filter(m =>
-  (m.name?.toLowerCase() || '').includes(searchTerm.toLowerCase())
-);
+    (m.name?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+  );
 
+  const sessionEnd = form.sessionStart && !isNaN(parseInt(form.sessionStart, 10))
+    ? parseInt(form.sessionStart, 10) + 1
+    : '';
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow rounded-lg text-black">
@@ -133,7 +149,8 @@ export default function UpdateMember() {
 
       {selectedMember && (
         <form className="flex flex-col gap-3" onSubmit={handleUpdate}>
-          {['name','dept','phone','session','upazilla'].map(field => (
+          {/* Name, Dept, Phone, Upazilla */}
+          {['name','dept','phone','upazilla'].map(field => (
             <label key={field} className="flex flex-col">
               <span className="text-sm font-medium">{field.charAt(0).toUpperCase() + field.slice(1)}</span>
               <input
@@ -146,6 +163,49 @@ export default function UpdateMember() {
               />
             </label>
           ))}
+
+          {/* Blood Group */}
+          <label className="flex flex-col">
+            <span className="text-sm font-medium">Blood Group</span>
+            <select
+              name="bloodGroup"
+              value={form.bloodGroup}
+              onChange={handleChange}
+              className="border p-2 rounded"
+              required
+            >
+              <option value="">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </label>
+
+          {/* Session Start & End */}
+          <div className="flex gap-2">
+            <input
+              type="number"
+              name="sessionStart"
+              placeholder="Session Start"
+              value={form.sessionStart}
+              onChange={handleChange}
+              className="border p-2 rounded w-1/2"
+              required
+            />
+            <input
+              type="number"
+              name="sessionEnd"
+              placeholder="Session End"
+              value={sessionEnd}
+              readOnly
+              className="border p-2 rounded w-1/2 bg-gray-100 cursor-not-allowed"
+            />
+          </div>
 
           {/* File Input */}
           <label className="flex items-center justify-between border p-2 rounded cursor-pointer hover:bg-gray-100">

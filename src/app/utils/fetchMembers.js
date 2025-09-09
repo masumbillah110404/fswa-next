@@ -13,6 +13,7 @@ export async function fetchMembers() {
       name: data.name || '',
       dept: data.dept || '',
       phone: data.phone || '',
+      bloodGroup: data.bloodGroup || '',
       session: data.session || '',
       upazilla: data.upazilla || '',
       image: data.image || ''

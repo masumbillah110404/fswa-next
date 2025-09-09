@@ -104,6 +104,7 @@ export default function ExecutiveMembersPage() {
                   src={member.image ? member.image : "/default-avatar.jpg"}
                   alt={member.name}
                   fill
+                  unoptimized
                   sizes="100%"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
